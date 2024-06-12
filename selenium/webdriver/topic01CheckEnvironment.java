@@ -43,6 +43,9 @@ public class topic01CheckEnvironment {
     public void TC_03_Form() {
         Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
     }
+    public void TC_04_(){
+        //,,
+    }
 
     @AfterClass
     public void afterClass() {

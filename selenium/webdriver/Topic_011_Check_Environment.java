@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 public class Topic_011_Check_Environment {
     WebDriver driver;
+    String projectPath = System.getProperty("user.dir");
+    String osName = System.getProperty("os.name");
 
     @Test
     public void TC_01_Run_On_Firefox() {

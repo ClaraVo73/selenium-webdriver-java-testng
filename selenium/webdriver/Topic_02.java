@@ -18,7 +18,7 @@ public class Topic_02 {
     @BeforeClass
     public void beforeClass() {
         if (osName.contains("Windows")) {
-            System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+            System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
         } else {
             System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
         }

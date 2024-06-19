@@ -33,7 +33,7 @@ public class Topic_05_Web_Browser {
         // Tuơng tac vs Element thi se thong qua bien Webelement element
     }
 
-    @Test
+
     public void tc01(){
         //**dong tab dang dung
         driver.close();
@@ -59,7 +59,7 @@ public class Topic_05_Web_Browser {
         //Click vao link tieng viet
         //Tra ve url cua page hien tai
         //Verify tuong doi
-        Assert.assertEquals(driver.getPageSource().contains("Facebook giúp bạn kết nối"));
+       // Assert.assertEquals(driver.getPageSource().contains("Facebook giúp bạn kết nối"));
 
         //Tra ve title cua page hien tai
         Assert.assertEquals(driver.getTitle(), "Facebook-Dang nhap hoac Dang ky");

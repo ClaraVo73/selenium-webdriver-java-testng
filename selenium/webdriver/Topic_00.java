@@ -29,7 +29,13 @@ public class Topic_00 {
     public void tc01(){
 
     }
-
+    public void  sleepInSecond(long timeInSecond){
+        try{
+            Thread.sleep(timeInSecond * 1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
     @AfterClass
     public void afterClass() {
         driver.quit();

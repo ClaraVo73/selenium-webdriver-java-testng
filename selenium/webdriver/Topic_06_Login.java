@@ -61,7 +61,7 @@ public class Topic_06_Login {
         driver.findElement(By.id("email")).sendKeys("auto@gmail.com");
         driver.findElement(By.id("pass")).sendKeys("12345");
         driver.findElement(By.id("send2")).click();
-
+//a
         Assert.assertEquals(driver.findElement(By.id("advice-validate-password-pass")).getText(),"Please enter 6 or more characters without leading or trailing spaces.");
     }
 

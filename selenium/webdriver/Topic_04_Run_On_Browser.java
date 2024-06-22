@@ -23,7 +23,7 @@ public class Topic_04_Run_On_Browser {
         }
 
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+       // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("https://flukeout.github.io/");
         driver.quit();
     }
@@ -37,7 +37,7 @@ public class Topic_04_Run_On_Browser {
         }
 
         driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("https://flukeout.github.io/");
         driver.quit();
     }

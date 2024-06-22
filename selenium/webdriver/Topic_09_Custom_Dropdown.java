@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -39,29 +40,55 @@ public class Topic_09_Custom_Dropdown {
     public void tc01_jquery(){
 //1.Go to link
         driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
-//2.Click on "Select a speed" dropdown
-        driver.findElement(By.id("speed-button")).click();
-//3.Wait all item are loaded successfully
-//Locator phai lay de dai dien cho all items
-// Lay den the chua text
-        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#speed-menu div[role='option']")));
-// Dua tat ca cac item trong dropdown vao list
-        List<WebElement> speedDropdownItems = driver.findElements(By.cssSelector("ul#speed-menu div[role='option']"));
-//3.1 Find item need use (dung vong lap duyet qua de tim)
+
+        //Chon item cho speed dropdown
+        //span#speed-button : parentcss khi click vao dropdown
+        //ul#speed-menu div[role='option: allItemCss lay all item khi dropdown do xuong. lay dung dong co text
+        selectItemInDropdown("span#speed-button","ul#speed-menu div[role='option']","Faster");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button>span.ui-selectmenu-text")).getText(),"Faster");
+    }
+
+    @Test
+    public void tc02_reactjs(){
+//1.Go to link
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+
+        //Chon item cho speed dropdown
+        selectItemInDropdown("i.dropdown.icon","span.text","Matt");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Matt");
+
+        selectItemInDropdown("i.dropdown.icon","span.text","Christian");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Christian");
+
+        selectItemInDropdown("i.dropdown.icon","span.text","Jenny Hess");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Jenny Hess");
+    }
+    public void selectItemInDropdown(String parentCss, String allItemCss, String expectedTextItem){
+        //1.Click vao mot the bat ky de cho no xo ra het cac item cua dropdown
+        driver.findElement(By.cssSelector(parentCss)).click();
+
+        //2.Wait all item are loaded successfully
+        //Dua tat ca cac item trong dropdown vao list
+       // explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#speed-menu div[role='option']")));
+        List<WebElement> speedDropdownItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(allItemCss)));
+
+        //3. Find item need use (dung vong lap duyet qua de tim)
         for (WebElement tempItem : speedDropdownItems){
+            //4. Kiem tra cái text cua item dung voi cai minh mong muon
             String itemText = tempItem.getText();
-            System.out.print(itemText);
-//4. Check expected text
-            if (itemText.equals("Faster")){
-//5. Click on this item
+            System.out.println(itemText);
+            //5. Check expected text
+            if (itemText.equals(expectedTextItem)){
+                //6. Click on this item
                 tempItem.click();
+                // Thoat ra khoi vong lap
+                break;
             }
-// Thoat ra khoi vong lap
-            break;
         }
-//3.2 No need scroll down to find item
-
-
     }
 
     public void  sleepInSecond(long timeInSecond){

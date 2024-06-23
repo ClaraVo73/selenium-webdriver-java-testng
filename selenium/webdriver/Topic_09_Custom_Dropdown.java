@@ -67,6 +67,49 @@ public class Topic_09_Custom_Dropdown {
         sleepInSecond(3);
         Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Jenny Hess");
     }
+
+    @Test
+    public void tc03_vuejs(){
+//1.Go to link
+        driver.get("https://mikerodham.github.io/vue-dropdowns/");
+
+        //Chon item cho speed dropdown
+        selectItemInDropdown("li.dropdown-toggle","ul.dropdown-menu a","Second Option");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),"Second Option");
+
+        //Chon item cho speed dropdown
+        selectItemInDropdown("li.dropdown-toggle","ul.dropdown-menu a","Third Option");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),"Third Option");
+
+        //Chon item cho speed dropdown
+        selectItemInDropdown("li.dropdown-toggle","ul.dropdown-menu a","First Option");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),"First Option");
+
+    }
+
+    @Test
+    public void tc04_editable(){
+//1.Go to link
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+
+        //Chon item cho speed dropdown
+        enterAndSelectItemInDropdown("input.search","span.text","Angola");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Angola");
+
+        //Chon item cho speed dropdown
+        enterAndSelectItemInDropdown("input.search","span.text","Benin");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Benin");
+
+        //Chon item cho speed dropdown
+        enterAndSelectItemInDropdown("input.search","span.text","Aland Islands");
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(),"Aland Islands");
+    }
     public void selectItemInDropdown(String parentCss, String allItemCss, String expectedTextItem){
         //1.Click vao mot the bat ky de cho no xo ra het cac item cua dropdown
         driver.findElement(By.cssSelector(parentCss)).click();
@@ -82,7 +125,34 @@ public class Topic_09_Custom_Dropdown {
             String itemText = tempItem.getText();
             System.out.println(itemText);
             //5. Check expected text
-            if (itemText.equals(expectedTextItem)){
+            if (itemText.trim().equals(expectedTextItem)){
+                //trim de xoa khoang trang trong text
+                //6. Click on this item
+                tempItem.click();
+                // Thoat ra khoi vong lap
+                break;
+            }
+        }
+    }
+
+    public void enterAndSelectItemInDropdown(String textboxcss, String allItemCss, String expectedTextItem){
+        //1. Nhap expected va xo ra cac item matching
+        driver.findElement(By.cssSelector(textboxcss)).clear();
+        driver.findElement(By.cssSelector(textboxcss)).sendKeys(expectedTextItem);
+        sleepInSecond(1);
+
+        //2.Wait all item are loaded successfully
+        //Dua tat ca cac item trong dropdown vao list
+        List<WebElement> speedDropdownItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(allItemCss)));
+
+        //3. Find item need use (dung vong lap duyet qua de tim)
+        for (WebElement tempItem : speedDropdownItems){
+            //4. Kiem tra cái text cua item dung voi cai minh mong muon
+            String itemText = tempItem.getText();
+            System.out.println(itemText);
+            //5. Check expected text
+            if (itemText.trim().equals(expectedTextItem)){
+                //trim de xoa khoang trang trong text
                 //6. Click on this item
                 tempItem.click();
                 // Thoat ra khoi vong lap

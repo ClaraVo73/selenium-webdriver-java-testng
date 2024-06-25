@@ -34,7 +34,7 @@ public class Topic_12_Alert {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    @Test
+   // @Test
     public void tc01_accept_alert(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
         driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
@@ -52,7 +52,7 @@ public class Topic_12_Alert {
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You clicked an alert successfully");
 
     }
-    @Test
+   // @Test
     public void tc02_confirm_alert(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
         driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
@@ -68,7 +68,7 @@ public class Topic_12_Alert {
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You clicked: Cancel");
     }
 
-    @Test
+    //@Test
     public void tc03_prompt_alert(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
         driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
@@ -88,6 +88,29 @@ public class Topic_12_Alert {
         //Verify show message:You entered: automationfc yeah yeah
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You entered: " + courseName);
     }
+
+    @Test
+    public void tc04_authentication_alert(){
+        driver.get(passUserAndPassToUrl("https://the-internet.herokuapp.com/basic_auth", "admin","admin"));
+        Assert.assertTrue(driver.findElement(By.xpath("//p[contains(string(), 'Congratulations! You must have the proper credentials.')]")).isDisplayed());
+
+    }
+
+    @Test
+    public void tc05_authentication_alert(){
+        //CLick on Link to go to authentication page
+        driver.get("https://the-internet.herokuapp.com");
+        String authenUrl = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getAttribute("href");
+        driver.get(passUserAndPassToUrl(authenUrl,"admin","admin"));
+        Assert.assertTrue(driver.findElement(By.xpath("//p[contains(string(), 'Congratulations! You must have the proper credentials.')]")).isDisplayed());
+
+    }
+    public String passUserAndPassToUrl(String url, String username, String password){
+        String[] arrayUrl = url.split("//");
+        return arrayUrl[0] + "//" + username + ":" + password + "@" +arrayUrl[1];
+        //https://admin:admin@the-internet.herokuapp.com/basic_auth
+    }
+
     public void  sleepInSecond(long timeInSecond){
         try{
             Thread.sleep(timeInSecond * 1000);

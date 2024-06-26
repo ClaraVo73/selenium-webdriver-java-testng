@@ -30,11 +30,12 @@ public class Topic_12_Alert {
         }
 
         driver = new ChromeDriver();
+
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-   // @Test
+    @Test
     public void tc01_accept_alert(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
         driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
@@ -52,7 +53,7 @@ public class Topic_12_Alert {
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You clicked an alert successfully");
 
     }
-   // @Test
+    @Test
     public void tc02_confirm_alert(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
         driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
@@ -68,7 +69,7 @@ public class Topic_12_Alert {
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You clicked: Cancel");
     }
 
-    //@Test
+    @Test
     public void tc03_prompt_alert(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
         driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();

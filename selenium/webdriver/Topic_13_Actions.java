@@ -3,6 +3,7 @@ package webdriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -36,7 +37,7 @@ public class Topic_13_Actions {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-   // @Test
+    @Test
     public void tc01_hover(){
         driver.get("https://automationfc.github.io/jquery-tooltip/");
         //Hover on textbox and verify tooltip is shown
@@ -46,7 +47,7 @@ public class Topic_13_Actions {
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class='ui-tooltip-content']")).getText(),"We ask for your age only for statistical purposes.");
 
     }
-    //@Test
+    @Test
     public void tc02_hover(){
         driver.get("https://www.myntra.com/");
         // Hover on Kids option and click on Home & Bath link
@@ -58,7 +59,7 @@ public class Topic_13_Actions {
         //Verify successful navigation to page
         Assert.assertEquals(driver.findElement(By.cssSelector("h1.title-title")).getText(),"Kids Home Bath");
     }
-   // @Test
+    @Test
     public void tc03_hover(){
         driver.get("https://www.fahasa.com/");
         sleepInSecond(15);
@@ -86,7 +87,7 @@ public class Topic_13_Actions {
         Assert.assertEquals(driver.findElement(By.xpath("//strong[string()='Business, Finance & Management']")).getText(), "BUSINESS, FINANCE & MANAGEMENT");
 
     }
-   // @Test
+   @Test
     public void tc04_click_and_hold(){
         driver.get("https://automationfc.github.io/jquery-selectable/");
 
@@ -106,7 +107,7 @@ public class Topic_13_Actions {
         //Verify selected text
 
     }
-   // @Test
+    @Test
     public void tc05_click_and_select_element(){
         driver.get("https://automationfc.github.io/jquery-selectable/");
 
@@ -135,7 +136,7 @@ public class Topic_13_Actions {
 
     }
 
-    //@Test
+    @Test
     public void tc06_double_click(){
         driver.get("https://automationfc.github.io/basic-form/index.html");
 
@@ -145,7 +146,7 @@ public class Topic_13_Actions {
         Assert.assertEquals(driver.findElement(By.xpath("//p[@id='demo']")).getText(),"Hello Automation Guys!");
     }
 
-    @Test
+   @Test
     public void tc07_right_click(){
         driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
 
@@ -168,6 +169,32 @@ public class Topic_13_Actions {
 
         // Verify invisible paste
         Assert.assertFalse(driver.findElement(By.cssSelector("li.context-menu-icon-paste")).isDisplayed());
+
+    }
+
+   @Test
+    public void tc08_drag_and_drop(){
+        driver.get("https://automationfc.github.io/kendo-drag-drop/");
+
+        WebElement smallCircle = driver.findElement(By.id("draggable"));
+        WebElement bigCircle = driver.findElement(By.id("droptarget"));
+
+        action.dragAndDrop(smallCircle,bigCircle).perform();
+        sleepInSecond(2);
+
+        Assert.assertEquals(bigCircle.getText(),"You did great!");
+
+
+        String rgbaColor = bigCircle.getCssValue("background-color");
+        System.out.println("RGBcolor= " + rgbaColor);
+
+        //Convert rgbaColor to Hexa color
+        String hexaColor = Color.fromString(rgbaColor).asHex();
+        System.out.println("Hexa color = " + hexaColor);
+
+        //Verify background-color
+        Assert.assertEquals(hexaColor, "#03a9f4");
+
 
     }
 

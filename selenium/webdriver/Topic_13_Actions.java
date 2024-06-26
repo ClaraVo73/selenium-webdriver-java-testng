@@ -146,14 +146,31 @@ public class Topic_13_Actions {
     }
 
     @Test
-    public void tc07_double_click(){
-        driver.get("https://automationfc.github.io/basic-form/index.html");
+    public void tc07_right_click(){
+        driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
 
-        //double click
-        action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
+        //right click
+        action.contextClick(driver.findElement(By.cssSelector("span.context-menu-one"))).perform();
+        sleepInSecond(3);
+
+        //Hover on context menu: paste and verify paste show on menu
+            action.moveToElement(driver.findElement(By.cssSelector("li.context-menu-icon-paste"))).perform();
         sleepInSecond(2);
-        Assert.assertEquals(driver.findElement(By.xpath("//p[@id='demo']")).getText(),"Hello Automation Guys!");
+        Assert.assertTrue(driver.findElement(By.cssSelector("li.context-menu-icon-paste.context-menu-hover.context-menu-visible")).isDisplayed());
+
+        //Click on Paste on menu
+        action.click(driver.findElement(By.cssSelector("li.context-menu-icon-paste"))).perform();
+        sleepInSecond(2);
+
+        //Handle alert
+        driver.switchTo().alert().accept();
+        sleepInSecond(2);
+
+        // Verify invisible paste
+        Assert.assertFalse(driver.findElement(By.cssSelector("li.context-menu-icon-paste")).isDisplayed());
+
     }
+
 
 
 

@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -49,10 +50,12 @@ public class Topic_15_Random_Popup {
         driver.get("https://dehieu.vn/");
         sleepInSecond(10);
 
-        WebElement popup = driver.findElement(By.xpath("//div[@class='modal-content css-modal-bt']"));
         //1. Show popup and input email then click close popup
         //2. Don't show popup
-        if (popup.isDisplayed()){
+        //WebElement popup = driver.findElement(By.xpath("//div[@class='modal-content css-modal-bt']"));
+        //if (popup.isDisplayed()){   //cach 1 khong nen viet
+        List<WebElement> popups = driver.findElements(By.xpath("//div[@class='modal-content css-modal-bt']"));
+        if (!popups.isEmpty() && popups.get(0).isDisplayed()){
             System.out.println("Go to popup");
             //Input email , name and sign up
             driver.findElement(By.xpath("//div[@class='modal-content css-modal-bt']//input[@name='fields[full_name]']")).sendKeys("Clara");
@@ -69,12 +72,14 @@ public class Topic_15_Random_Popup {
             System.out.println("Do not show popup");
 
         }
-        Assert.assertFalse(popup.isDisplayed());
+        Assert.assertFalse(popups.isEmpty());
         //3. click  on dang nhap
         driver.findElement(By.xpath("//a[text()=' Đăng nhập']")).click();
 
 
     }
+
+
 
 
     public void  sleepInSecond(long timeInSecond){
@@ -90,6 +95,6 @@ public class Topic_15_Random_Popup {
     }
     @AfterClass
     public void afterClass() {
-       // driver.quit();
+       driver.quit();
     }
 }

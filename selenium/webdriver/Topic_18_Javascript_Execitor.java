@@ -283,6 +283,6 @@ public class Topic_18_Javascript_Execitor {
     }
     @AfterClass
     public void afterClass() {
-        //driver.quit();
+        driver.quit();
     }
 }

@@ -38,7 +38,7 @@ public class Topic_17_Window {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-  //  @Test
+    @Test
     public void tc01_title(){
         //parent page
         driver.get("https://automationfc.github.io/basic-form/index.html");
@@ -80,7 +80,7 @@ public class Topic_17_Window {
 
     }
 
-   // @Test
+    @Test
     public void tc02_id_window(){
         //parent page
         driver.get("http://live.techpanda.org/");
@@ -116,7 +116,7 @@ public class Topic_17_Window {
 
     }
 
-    //@Test
+    @Test
     public void tc03_title_cambridge(){
         //parent page
         driver.get("https://dictionary.cambridge.org/vi/");
@@ -145,7 +145,7 @@ public class Topic_17_Window {
     }
 
    //Case fail
-   // @Test
+  // @Test
     public void tc04_title_cambridge(){
         //parent page
         driver.get("https://courses.dce.harvard.edu/");

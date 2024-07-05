@@ -32,7 +32,7 @@ public class Topic_09_Custom_Dropdown {
 
         driver = new ChromeDriver();
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));// wait linh dong, neu chua tim thay element thi cho tiep. Neu thay thi khong cho nua
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     }
 

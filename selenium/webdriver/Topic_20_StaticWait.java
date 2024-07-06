@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_20_ImplicitWait {
+public class Topic_20_StaticWait {
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
@@ -25,15 +25,18 @@ public class Topic_20_ImplicitWait {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        //Pham vi tinh tu step duoc set tro xuong
     }
 
     @Test
     public void tc01_not_enough_time(){
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
        driver.get("https://automationfc.github.io/dynamic-loading/");
        driver.findElement(By.cssSelector("div#start>button")).click();
+
+       sleepInSecond(3);
+       //Fix cung wait thuong apply khi thu nghiem case/ implement test case - Khong dung bua bai
+        // Su dung voi Window/Tab khi wait cho page moi load thanh cong
+        // Upload multiple file - can sleep cung sau moi lan upload file
+
 
        //Loading icon mat 5s moi bien mat
         Assert.assertEquals(driver.findElement(By.cssSelector("div#finish>h4")).getText(), "Hello World!");
@@ -42,10 +45,10 @@ public class Topic_20_ImplicitWait {
 
     @Test
     public void tc02_enough_time(){
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://automationfc.github.io/dynamic-loading/");
         driver.findElement(By.cssSelector("div#start>button")).click();
 
+        sleepInSecond(5);
         //Loading icon mat 5s moi bien mat
         Assert.assertEquals(driver.findElement(By.cssSelector("div#finish>h4")).getText(), "Hello World!");
 
@@ -56,6 +59,7 @@ public class Topic_20_ImplicitWait {
         driver.get("https://automationfc.github.io/dynamic-loading/");
         driver.findElement(By.cssSelector("div#start>button")).click();
 
+        sleepInSecond(10);
         //Loading icon mat 5s moi bien mat
         Assert.assertEquals(driver.findElement(By.cssSelector("div#finish>h4")).getText(), "Hello World!");
 
@@ -63,5 +67,13 @@ public class Topic_20_ImplicitWait {
     @AfterClass
     public void afterClass() {
         driver.quit();
+    }
+
+    public void  sleepInSecond(long timeInSecond){
+        try{
+            Thread.sleep(timeInSecond * 1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }

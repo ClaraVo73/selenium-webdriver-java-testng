@@ -7,9 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
-public class Topic_00 {
+public class Topic_20_ImplicitWait {
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");

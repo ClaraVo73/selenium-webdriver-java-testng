@@ -2,6 +2,7 @@ package webdriver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -71,6 +72,24 @@ public class Topic_20_Element_Condition_Status {
 
         // cho cho Re-enter email textbox presence trong HTML (case naykhong hien thi tren UI ) trong vong 10s
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.name("reg_email_confirmation__")));
+    }
+
+    @Test
+    public void tc04_staleness(){
+        //1. Khong co tren UI
+        //1. Khong co trong HTML
+        driver.get("https://www.facebook.com/");
+        driver.findElement(By.xpath("//a[@data-testid='open-registration-form-button']")).click();
+
+        //1. element co trong HTML
+        WebElement reEnterEmailAddressTextbox = driver.findElement(By.name("reg_email_confirmation__"));
+        //2. Thao tac voi element khac lam cho element re-enter email khong con trong DOM nua
+        //3..4..5..
+        //6. Close popup di
+        driver.findElement(By.cssSelector("img._8idr")).click();
+
+        // cho cho Re-enter email textbox khong con trong DOM trong vong 10s
+        explicitWait.until(ExpectedConditions.stalenessOf(reEnterEmailAddressTextbox));
     }
 
     @AfterClass

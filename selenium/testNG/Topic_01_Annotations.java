@@ -2,14 +2,20 @@ package testNG;
 
 import org.testng.annotations.*;
 
-public class Topic_01_Automations {
-    @Test()
+public class Topic_01_Annotations {
+    @Test(groups = "admin")
     public void TC_01(){
         System.out.println("Testcase 01");
 
     }
-    @Test()
+    @Test( description = "TC-02 day nhao voooooooooooooooooo")
     public void TC_02(){
+        System.out.println("Testcase 02");
+
+    }
+
+    @Test()
+    public void TC_03(){
         System.out.println("Testcase 02");
 
     }

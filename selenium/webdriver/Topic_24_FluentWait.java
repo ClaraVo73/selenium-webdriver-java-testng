@@ -14,7 +14,7 @@ import java.util.function.Function;
 public class Topic_24_FluentWait {
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
-    String osName = System.getProperty("os.name");
+    String osName = System.getProperty("os.name").toLowerCase();
     JavascriptExecutor jsExcutor;
     FluentWait<WebDriver> fluentDriver;
 
@@ -25,6 +25,7 @@ public class Topic_24_FluentWait {
     public void beforeClass() {
         if (osName.contains("Windows")) {
             System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+
         } else {
             System.setProperty("webdriver.chrome.driver", projectPath + "/browserDrivers/chromedriver");
         }
